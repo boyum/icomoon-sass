@@ -13,16 +13,17 @@
 
 const argv = require('yargs').argv;
 // const copy = require('copy');
-const copyfiles = require('copyfiles');
+// const copyfiles = require('copyfiles');
+const cp = require('cp');
 // const createFile = require('create-file');
 const fileExists = require('file-exists');
 const mkdirp = require('mkdirp');
-// const replace = require('replace');
-const replaceInFile = require('replace-in-file');
+const replace = require('replace');
+// const replaceInFile = require('replace-in-file');
 
-const argument = argv._ + '';
+const argument = (argv._ + '').replace(/\\/g, '/') + '/';
 
-const directory = argument.endsWith('\\') || argument.endsWith('/') ? argv._ : argv._ + '\\';
+const directory = argument;
 
 const distDir = 'dist\\';
 
@@ -47,36 +48,38 @@ mkdirp(directory + distDir, err => {
 //     }
 // });
 
-copyfiles([directory + styleCss, directory + distDir], {}, _ => {});
+// copyfiles([directory + styleCss, directory + distDir], {}, _ => {});
+
+cp.sync(directory + styleCss, directory + distDir + 'style.css');
 
 // Replace `.icon` with `%icon`
-// replace({
-//     regex: /\.icon\-/g,
-//     replacement: '%icon-',
-//     paths: directory + distDir + styleCss,
-//     silent: true
-// });
-
-replaceInFile({
-    files: directory + distDir + styleCss,
-
-    replace: /\.icon\-/g,
-    with: '%icon-',
-
-    replace: /fonts\//g,
-    with: '../fonts/',
-
-    replace: /\:before/g,
-    with: ''
-}).catch(error => {
-    console.log(error);
+replace({
+    regex: /\.icon\-/g,
+    replacement: '%icon-',
+    paths: '\\' + directory + distDir + styleCss,
+    silent: true
 });
+
+// replaceInFile({
+//     files: directory + distDir + styleCss,
+
+//     replace: /\.icon\-/g,
+//     with: '%icon-',
+
+//     replace: /fonts\//g,
+//     with: '../fonts/',
+
+//     replace: /\:before/g,
+//     with: ''
+// }).catch(error => {
+//     console.log(error);
+// });
 
 // Replace `fonts/` with `../fonts`
 // replace({
 //     regex: /fonts\//g,
 //     replacement: '../fonts/',
-//     paths: directory + distDir + styleCss,
+//     paths: '/' + directory + distDir + styleCss,
 //     silent: true
 // });
 
@@ -84,6 +87,6 @@ replaceInFile({
 // replace({
 //     regex: /\:before/g,
 //     replacement: '',
-//     paths: directory + distDir + styleCss,
+//     paths: '/' + directory + distDir + styleCss,
 //     silent: true
 // });
