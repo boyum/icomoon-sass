@@ -1,0 +1,37 @@
+{
+  "name": "@boyum/icomoon-sass",
+  "version": "1.0.0",
+  "description": "Simple tool that makes sass variables from icomoon's generated font files",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "icomoon-sass": "bin/icomoon-sass.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/boyum/icomoon-sass.git"
+  },
+  "keywords": [
+    "icomoon",
+    "sass"
+  ],
+  "author": "Sindre Bøyum",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/boyum/icomoon-sass/issues"
+  },
+  "homepage": "https://github.com/boyum/icomoon-sass#readme",
+  "jshintConfig": {
+    "esversion": 6
+  },
+  "dependencies": {
+    "copy": "^0.3.0",
+    "copyfiles": "^1.1.0",
+    "create-file": "^1.0.1",
+    "mkdirp": "^0.5.1",
+    "replace-in-file": "^2.2.2",
+    "yargs": "^6.6.0"
+  }
+}
